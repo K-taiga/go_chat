@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"net/http"
 
+	// "github.com/sausheong/gwp/Chapter_2_Go_ChitChat/chitchat/data"
 	"github.com/mushahiroyuki/gowebprog/ch02/chitchat/data"
 )
 
@@ -21,15 +22,15 @@ func err(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
-func index(w http.ResponseWriter, r *http.Request) {
-	files := []string{
-		"templates/layout.html",
-		"templates/navbar.html",
-		"templates/index.html",
-	}
-	templates := template.Must(template.ParseFiles(files...))
-	threads, err := data.Threads()
-	if err == nil {
-		templates.ExecuteTemplate(w, "layout", threads)
+func index(writer http.ResponseWriter, request *http.Request) {
+	threads, err := data.Threads(); if err == nill {
+		// エラーかどうかだけ知りたいため、_（ブランク識別子)にSession構造体を入れる
+		-, err := session(writer,request)
+
+		if err != nil {
+			generateHTML(writer,threads,"layout","public.navbar","index")
+		} else {
+			generateHTML(writer,threads,"layout","private.navbar","index")
+		}
 	}
 }

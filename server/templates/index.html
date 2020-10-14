@@ -3,12 +3,15 @@
   <a href="/thread/new">スレッドを開始するか</a> 下のどれかに参加しましょう！
 </p>
 
+<!-- "range ."はスライスか配列の要素数分回す　今回はThreadの構造体を持ったthreadsの配列を想定 -->
 {{ range . }}
   <div class="panel panel-default">
     <div class="panel-heading">
+      <!-- .で回しているスライスのフィールド、Topicにアクセス -->
       <span class="lead"> <i class="fa fa-comment-o"></i> {{ .Topic }}</span>
     </div>
     <div class="panel-body">
+      <!-- 構造体の中にないフィールドはその構造体に取り込まれたメソッドを呼び出せる　.NumRepliesというメソッドを呼び出す -->
       開始ユーザー {{ .User.Name }} - 開始日 {{ .CreatedAtDate }} - 投稿数 {{ .NumReplies }}。
       <div class="pull-right">
         <a href="/thread/read?id={{.Uuid }}">もっと読む</a>

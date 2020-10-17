@@ -12,7 +12,7 @@ func main() {
 	// /static/がつくリクエストURLはpuclic配下にあるか探してそのまま返送するようにする
 	mux.Handle("/static/", http.StripPrefix("/static/", files))
 
-	// ルートURLとハンドラ関数を引数にとる　ハンドラ関数はResponseWirterとRequestを引数にするため、引数を渡す必要はない？
+	// ルートURLとハンドラ関数を引数にとる ハンドラ関数はResponseWirterとHTTPから受け取ったRequestを引数にするため、引数を渡す必要はない
 	mux.HandleFunc("/", index)
 	mux.HandleFunc("/err", err)
 

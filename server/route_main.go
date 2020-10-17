@@ -1,11 +1,9 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
 
-	// "github.com/sausheong/gwp/Chapter_2_Go_ChitChat/chitchat/data"
-	"github.com/mushahiroyuki/gowebprog/ch02/chitchat/data"
+	"local.packages/data"
 )
 
 // GET /err?msg=
@@ -23,14 +21,15 @@ func err(writer http.ResponseWriter, request *http.Request) {
 }
 
 func index(writer http.ResponseWriter, request *http.Request) {
-	threads, err := data.Threads(); if err == nill {
+	threads, err := data.Threads()
+	if err == nil {
 		// エラーかどうかだけ知りたいため、_（ブランク識別子)にSession構造体を入れる
-		-, err := session(writer,request)
+		_, err := session(writer, request)
 
 		if err != nil {
-			generateHTML(writer,threads,"layout","public.navbar","index")
+			generateHTML(writer, threads, "layout", "public.navbar", "index")
 		} else {
-			generateHTML(writer,threads,"layout","private.navbar","index")
+			generateHTML(writer, threads, "layout", "private.navbar", "index")
 		}
 	}
 }
